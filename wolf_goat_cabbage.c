@@ -1,9 +1,5 @@
 #include "base.h"
 
-
-//Ist dieser edit gepushed???
-
-
 /**
 List of objects on the left river bank.
 */
@@ -59,5 +55,6 @@ void play_wolf_goat_cabbage(void) {
 int main(void) {
 	report_memory_leaks(true);
 	play_wolf_goat_cabbage();
+	printsln("hi");
 	return 0;
 }
