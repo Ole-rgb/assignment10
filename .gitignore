@@ -1,12 +1,8 @@
 /Makefile
 /bleep_censor
-/bleep_censor.c
 /bleep_censor.dSYM
 /filesystem
-/filesystem.c
 /filesystem.dSYM
-/wish_tree.c
 /wishes.txt
 /wolf_goat_cabbage
-/wolf_goat_cabbage.c
 /wolf_goat_cabbage.dSYM
