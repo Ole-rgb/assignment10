@@ -1,6 +1,6 @@
 /*
     make bleep_censor
-    ./bleep_censor
+    .kjbdsansdfüoasdof/bleep_censor
     make bleep_censor && ./bleep_censor
 
 */
