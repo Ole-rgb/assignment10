@@ -37,12 +37,36 @@ void print_situation(void) {
 }
 
 void finish(void) {
-	exit(0);
+	switch (position) {
+		case RIGHT:	
+		if (sl_contains(left, "Wolf") && sl_contains(left, "Goat")) {
+			printf("Wolf eats Goat");
+			exit(0);
+		}
+		else if (sl_contains(left, "Goat") && sl_contains(left, "Cabbage")) {
+			printf("Goat eats Cabbage");
+			exit(0);
+		}
+		case LEFT:
+		if (sl_contains(right, "Wolf") && sl_contains(right, "Goat")) {
+			printf("Wolf eats Goat");
+			exit(0);
+		}
+		else if (sl_contains(right, "Goat") && sl_contains(right, "Cabbage")) {
+			printf("Goat eats Cabbage");
+			exit(0);
+		}
+	}
+
+	if (sl_contains(right, "Wolf") && sl_contains(right, "Cabbage") && sl_contains(right, "Goat")) {
+		printf("You win!");
+		exit(0);
+	}
 	// todo: implement
 }
 
 void evaluate_situation(void) {
-	// todo: implement
+	finish();
 }
 
 bool starts_with(String element, int index, String x) {
@@ -50,12 +74,16 @@ bool starts_with(String element, int index, String x) {
 }
 
 void play_wolf_goat_cabbage(void) {
-	// todo: implement
+	//anfangszustand setzen
+	left = sl_of_string("Wolf, Goat, Cabbage");
+	right = sl_of_string("");
+	boat = sl_of_string("");
+	position = LEFT;
+	print_situation();
 }
 
 int main(void) {
-	report_memory_leaks(true);
+	//report_memory_leaks(true);
 	play_wolf_goat_cabbage();
-	printsln("hi");
 	return 0;
 }
