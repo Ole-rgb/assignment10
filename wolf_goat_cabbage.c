@@ -80,6 +80,18 @@ void play_wolf_goat_cabbage(void) {
 	boat = sl_of_string("");
 	position = LEFT;
 	print_situation();
+	char ch = '\0';
+	while(ch != 'q') {
+		ch = getchar();
+		switch(ch) {
+			case 'l': position = LEFT;
+			print_situation();
+			break;
+			case 'r': position = RIGHT;
+			print_situation();
+			break;
+		}
+	}
 }
 
 int main(void) {
