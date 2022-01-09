@@ -75,10 +75,10 @@ StringOption starts_with(String element, int index, String x) {
 	return make_string_none();
 }
 
-bool is_boat_empty(List boat) {
-	if(!sl_contains(boat, "goat") && 
-	!sl_contains(boat, "cabbage") && 
-	!sl_contains(boat, "wolf")) {
+bool is_it_empty(List it) {
+	if(!sl_contains(it, "goat") && 
+	!sl_contains(it, "cabbage") && 
+	!sl_contains(it, "wolf")) {
 		return true;
 	}
 	return false;
@@ -91,12 +91,11 @@ void play_wolf_goat_cabbage(void) {
 	right = sl_of_string("");
 	boat = sl_of_string("");
 	position = LEFT;
-	List choice;
 	print_situation();
 	char ch[8];
+	int index;
 	while(!(s_equals(ch, "q"))) {
 		scanf("%s", ch);
-		String str = s_copy(ch);
 		if(s_equals(ch, "l")) {
 			position = LEFT;
 		}
@@ -106,11 +105,19 @@ void play_wolf_goat_cabbage(void) {
 		else {
 			List auto_completed = sl_choose(left, starts_with, ch);
 			//sl_print(auto_completed);
-			if(position == LEFT && is_boat_empty(boat)) {
+			if(position == LEFT && is_it_empty(boat) && !is_it_empty(left)) {
+				if((index = sl_index(left, sl_get(auto_completed, 0))) > -1) {
+					printf("%d", index);
+				}		
 				boat = auto_completed;
+				
+			}
+			else if(position == LEFT && !is_it_empty(boat)) {
+			
 			}
 		}
 		print_situation();
+		evaluate_situation();
 	}
 }
 
