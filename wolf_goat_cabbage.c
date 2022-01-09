@@ -37,17 +37,17 @@ void print_situation(void) {
 }
 
 void finish(void) {
-	switch (position) {
-		case RIGHT:	
+	if(position == RIGHT) {
 		if (sl_contains(left, "wolf") && sl_contains(left, "goat")) {
-			printf("Wolf eats Goat\n");
+			printf("i am right Wolf eats Goat\n");
 			exit(0);
 		}
 		else if (sl_contains(left, "goat") && sl_contains(left, "cabbage")) {
-			printf("Goat eats Cabbage\n");
+			printf("i am right Goat eats Cabbage\n");
 			exit(0);
 		}
-		case LEFT:
+	}
+	if(position == LEFT) {
 		if (sl_contains(right, "wolf") && sl_contains(right, "goat")) {
 			printf("Wolf eats Goat\n");
 			exit(0);
