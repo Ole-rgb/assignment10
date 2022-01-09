@@ -39,27 +39,47 @@ void print_situation(void) {
 void finish(void) {
 	if(position == RIGHT) {
 		if (sl_contains(left, "wolf") && sl_contains(left, "goat")) {
-			printf("i am right Wolf eats Goat\n");
+			printf("Wolf eats Goat\n");
+					sl_free(left);
+		sl_free(right);
+		sl_free(boat);
+		sl_free(normal);
 			exit(0);
 		}
 		else if (sl_contains(left, "goat") && sl_contains(left, "cabbage")) {
-			printf("i am right Goat eats Cabbage\n");
+			printf("Goat eats Cabbage\n");
+					sl_free(left);
+		sl_free(right);
+		sl_free(boat);
+		sl_free(normal);
 			exit(0);
 		}
 	}
 	if(position == LEFT) {
 		if (sl_contains(right, "wolf") && sl_contains(right, "goat")) {
 			printf("Wolf eats Goat\n");
+					sl_free(left);
+		sl_free(right);
+		sl_free(boat);
+		sl_free(normal);
 			exit(0);
 		}
 		else if (sl_contains(right, "goat") && sl_contains(right, "cabbage")) {
 			printf("Goat eats Cabbage\n");
+					sl_free(left);
+		sl_free(right);
+		sl_free(boat);
+		sl_free(normal);
 			exit(0);
 		}
 	}
 
 	if (sl_contains(right, "wolf") && sl_contains(right, "cabbage") && sl_contains(right, "goat")) {
 		printf("You win!\n");
+		sl_free(left);
+		sl_free(right);
+		sl_free(boat);
+		sl_free(normal);
 		exit(0);
 	}
 	// todo: implement
@@ -146,7 +166,7 @@ void play_wolf_goat_cabbage(void) {
 }
 
 int main(void) {
-	//report_memory_leaks(true);
+	report_memory_leaks(true);
 	play_wolf_goat_cabbage();
 	return 0;
 }
