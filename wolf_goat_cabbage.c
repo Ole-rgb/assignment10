@@ -18,6 +18,7 @@ List boat;
 /**
 The boat may either be at the left or right river bank. We don't care for the transition (boat crossing the river).
 */
+List normal;
 enum Position {
 	LEFT, RIGHT
 };
@@ -87,6 +88,7 @@ bool is_it_empty(List it) {
 
 void play_wolf_goat_cabbage(void) {
 	//anfangszustand setzen
+	normal = sl_of_string("wolf, goat, cabbage");
 	left = sl_of_string("wolf, goat, cabbage");
 	right = sl_of_string("");
 	boat = sl_of_string("");
@@ -94,6 +96,8 @@ void play_wolf_goat_cabbage(void) {
 	print_situation();
 	char ch[8];
 	int index;
+	String ac_str;
+	List auto_completed;
 	while(!(s_equals(ch, "q"))) {
 		scanf("%s", ch);
 		if(s_equals(ch, "l")) {
@@ -103,8 +107,8 @@ void play_wolf_goat_cabbage(void) {
 			position = RIGHT;
 		}
 		else {
-			List auto_completed = sl_choose(left, starts_with, ch);
-			String ac_str = sl_get(auto_completed, 0);
+			auto_completed = sl_choose(normal, starts_with, ch);
+			ac_str = sl_get(auto_completed, 0);
 			//sl_print(auto_completed);
 			if(position == LEFT && is_it_empty(boat) && !is_it_empty(left)) {
 				if((index = sl_index(left, ac_str)) > -1) {
@@ -112,12 +116,23 @@ void play_wolf_goat_cabbage(void) {
 					boat = auto_completed;
 				}
 			}
+			
 			else if(position == LEFT && !is_it_empty(boat)) {
+				//String ac_str = sl_get(auto_completed, 0);
 				if((index = sl_index(boat, ac_str)) > -1) {
-					//sl_remove(boat, index);
-					//sl_append(left, sl_get(auto_completed, 0));				
+					sl_remove(boat, index);
+					sl_append(left, sl_get(auto_completed, 0));				
 				}
 			}
+
+			else if(position == RIGHT && is_it_empty(boat)) {
+
+			}
+			
+			else if(position == RIGHT && is_it_empty(boat)) {
+
+			}
+			
 		}
 		print_situation();
 		evaluate_situation();
