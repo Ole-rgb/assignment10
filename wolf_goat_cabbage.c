@@ -39,26 +39,26 @@ void finish(void) {
 	switch (position) {
 		case RIGHT:	
 		if (sl_contains(left, "wolf") && sl_contains(left, "goat")) {
-			printf("Wolf eats Goat");
+			printf("Wolf eats Goat\n");
 			exit(0);
 		}
 		else if (sl_contains(left, "goat") && sl_contains(left, "cabbage")) {
-			printf("Goat eats Cabbage");
+			printf("Goat eats Cabbage\n");
 			exit(0);
 		}
 		case LEFT:
 		if (sl_contains(right, "wolf") && sl_contains(right, "goat")) {
-			printf("Wolf eats Goat");
+			printf("Wolf eats Goat\n");
 			exit(0);
 		}
 		else if (sl_contains(right, "goat") && sl_contains(right, "cabbage")) {
-			printf("Goat eats Cabbage");
+			printf("Goat eats Cabbage\n");
 			exit(0);
 		}
 	}
 
 	if (sl_contains(right, "wolf") && sl_contains(right, "cabbage") && sl_contains(right, "goat")) {
-		printf("You win!");
+		printf("You win!\n");
 		exit(0);
 	}
 	// todo: implement
@@ -104,16 +104,19 @@ void play_wolf_goat_cabbage(void) {
 		}
 		else {
 			List auto_completed = sl_choose(left, starts_with, ch);
+			String ac_str = sl_get(auto_completed, 0);
 			//sl_print(auto_completed);
 			if(position == LEFT && is_it_empty(boat) && !is_it_empty(left)) {
-				if((index = sl_index(left, sl_get(auto_completed, 0))) > -1) {
-					printf("\n%d\n", index);
+				if((index = sl_index(left, ac_str)) > -1) {
 					sl_remove(left, index);
-				}		
-				boat = auto_completed;
+					boat = auto_completed;
+				}
 			}
 			else if(position == LEFT && !is_it_empty(boat)) {
-				//if((index = sl_index(left, sl_get(auto_completed, 0))))
+				if((index = sl_index(boat, ac_str)) > -1) {
+					//sl_remove(boat, index);
+					//sl_append(left, sl_get(auto_completed, 0));				
+				}
 			}
 		}
 		print_situation();
