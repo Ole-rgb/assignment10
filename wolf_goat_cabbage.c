@@ -2,7 +2,6 @@
 
 /**
 List of objects on the left river bank.
-change made
 */
 List left;
 
@@ -39,26 +38,26 @@ void print_situation(void) {
 void finish(void) {
 	switch (position) {
 		case RIGHT:	
-		if (sl_contains(left, "Wolf") && sl_contains(left, "Goat")) {
+		if (sl_contains(left, "wolf") && sl_contains(left, "goat")) {
 			printf("Wolf eats Goat");
 			exit(0);
 		}
-		else if (sl_contains(left, "Goat") && sl_contains(left, "Cabbage")) {
+		else if (sl_contains(left, "goat") && sl_contains(left, "cabbage")) {
 			printf("Goat eats Cabbage");
 			exit(0);
 		}
 		case LEFT:
-		if (sl_contains(right, "Wolf") && sl_contains(right, "Goat")) {
+		if (sl_contains(right, "wolf") && sl_contains(right, "goat")) {
 			printf("Wolf eats Goat");
 			exit(0);
 		}
-		else if (sl_contains(right, "Goat") && sl_contains(right, "Cabbage")) {
+		else if (sl_contains(right, "goat") && sl_contains(right, "cabbage")) {
 			printf("Goat eats Cabbage");
 			exit(0);
 		}
 	}
 
-	if (sl_contains(right, "Wolf") && sl_contains(right, "Cabbage") && sl_contains(right, "Goat")) {
+	if (sl_contains(right, "wolf") && sl_contains(right, "cabbage") && sl_contains(right, "goat")) {
 		printf("You win!");
 		exit(0);
 	}
@@ -69,28 +68,49 @@ void evaluate_situation(void) {
 	finish();
 }
 
-bool starts_with(String element, int index, String x) {
-	return s_starts_with(element, x);
+StringOption starts_with(String element, int index, String x) {
+	if(s_starts_with(element, x)) {
+		return make_string_some(element);
+	}
+	return make_string_none();
+}
+
+bool is_boat_empty(List boat) {
+	if(!sl_contains(boat, "goat") && 
+	!sl_contains(boat, "cabbage") && 
+	!sl_contains(boat, "wolf")) {
+		return true;
+	}
+	return false;
+	
 }
 
 void play_wolf_goat_cabbage(void) {
 	//anfangszustand setzen
-	left = sl_of_string("Wolf, Goat, Cabbage");
+	left = sl_of_string("wolf, goat, cabbage");
 	right = sl_of_string("");
 	boat = sl_of_string("");
 	position = LEFT;
+	List choice;
 	print_situation();
-	char ch = '\0';
-	while(ch != 'q') {
-		ch = getchar();
-		switch(ch) {
-			case 'l': position = LEFT;
-			print_situation();
-			break;
-			case 'r': position = RIGHT;
-			print_situation();
-			break;
+	char ch[8];
+	while(!(s_equals(ch, "q"))) {
+		scanf("%s", ch);
+		String str = s_copy(ch);
+		if(s_equals(ch, "l")) {
+			position = LEFT;
 		}
+		else if(s_equals(ch, "r")) {
+			position = RIGHT;
+		}
+		else {
+			List auto_completed = sl_choose(left, starts_with, ch);
+			//sl_print(auto_completed);
+			if(position == LEFT && is_boat_empty(boat)) {
+				boat = auto_completed;
+			}
+		}
+		print_situation();
 	}
 }
 
