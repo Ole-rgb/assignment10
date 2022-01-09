@@ -107,37 +107,42 @@ void play_wolf_goat_cabbage(void) {
 			position = RIGHT;
 		}
 		else {
-			auto_completed = sl_choose(normal, starts_with, ch);
-			ac_str = sl_get(auto_completed, 0);
+
+			if(!(s_equals(ch, "q"))) {
+				auto_completed = sl_choose(normal, starts_with, ch);
+				ac_str = sl_get(auto_completed, 0);
+			
 			//sl_print(auto_completed);
-			if(position == LEFT && is_it_empty(boat) && !is_it_empty(left)) {
-				if((index = sl_index(left, ac_str)) > -1) {
-					sl_remove(left, index);
-					boat = auto_completed;
+				if(position == LEFT && is_it_empty(boat) && !is_it_empty(left)) {
+					if((index = sl_index(left, ac_str)) > -1) {
+						sl_remove(left, index);
+						boat = auto_completed;
 				}
 			}
 			
-			else if(position == LEFT && !is_it_empty(boat)) {
+				else if(position == LEFT && !is_it_empty(boat)) {
 				//String ac_str = sl_get(auto_completed, 0);
-				if((index = sl_index(boat, ac_str)) > -1) {
-					sl_remove(boat, index);
-					sl_append(left, sl_get(auto_completed, 0));				
+					if((index = sl_index(boat, ac_str)) > -1) {
+						sl_remove(boat, index);
+						sl_append(left, sl_get(auto_completed, 0));				
 				}
 			}
 
-			else if(position == RIGHT && is_it_empty(boat)) {
-				if((index = sl_index(right, ac_str)) > -1) {
-					sl_remove(right, index);
-					sl_append(boat, ac_str);
+				else if(position == RIGHT && is_it_empty(boat)) {
+					if((index = sl_index(right, ac_str)) > -1) {
+						sl_remove(right, index);
+						sl_append(boat, ac_str);
 				}
 			}
 			
-			else if(position == RIGHT && !is_it_empty(boat)) {
-				if((index = sl_index(boat, ac_str)) > -1) {
-					sl_remove(boat, index);
-					sl_append(right, ac_str);
+				else if(position == RIGHT && !is_it_empty(boat)) {
+					if((index = sl_index(boat, ac_str)) > -1) {
+						sl_remove(boat, index);
+						sl_append(right, ac_str);
+					}
 				}
 			}
+			
 			
 		}
 		print_situation();
@@ -146,7 +151,7 @@ void play_wolf_goat_cabbage(void) {
 }
 
 int main(void) {
-	report_memory_leaks(true);
+	//report_memory_leaks(true);
 	play_wolf_goat_cabbage();
 	return 0;
 }
