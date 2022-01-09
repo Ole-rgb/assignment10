@@ -107,13 +107,13 @@ void play_wolf_goat_cabbage(void) {
 			//sl_print(auto_completed);
 			if(position == LEFT && is_it_empty(boat) && !is_it_empty(left)) {
 				if((index = sl_index(left, sl_get(auto_completed, 0))) > -1) {
-					printf("%d", index);
+					printf("\n%d\n", index);
+					sl_remove(left, index);
 				}		
 				boat = auto_completed;
-				
 			}
 			else if(position == LEFT && !is_it_empty(boat)) {
-			
+				//if((index = sl_index(left, sl_get(auto_completed, 0))))
 			}
 		}
 		print_situation();
