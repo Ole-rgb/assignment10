@@ -126,11 +126,17 @@ void play_wolf_goat_cabbage(void) {
 			}
 
 			else if(position == RIGHT && is_it_empty(boat)) {
-
+				if((index = sl_index(right, ac_str)) > -1) {
+					sl_remove(right, index);
+					sl_append(boat, ac_str);
+				}
 			}
 			
-			else if(position == RIGHT && is_it_empty(boat)) {
-
+			else if(position == RIGHT && !is_it_empty(boat)) {
+				if((index = sl_index(boat, ac_str)) > -1) {
+					sl_remove(boat, index);
+					sl_append(right, ac_str);
+				}
 			}
 			
 		}
